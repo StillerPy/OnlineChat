@@ -30,10 +30,12 @@ class Connection:
     publish_key = 'pub-c-f60b5e45-2e40-4e34-a45c-34ce61062fd7'
     subscribe_key = 'sub-c-34a1b99e-36c6-4179-ac76-fec5eb278b7b'
 
-    def __init__(self):
+    def __init__(self, onMessageFunc=None):
         self.userId = self.makeUserId()
         self.pubNub = self.makePubNub()
-        subscribeCallback = MySubscribeCallback(self.userId, self.onMessageFunc)
+        if onMessageFunc is None:
+            onMessageFunc = self.onMessageFunc
+        subscribeCallback = MySubscribeCallback(self.userId, onMessageFunc)
         self.pubNub.add_listener(subscribeCallback)
         self.pubNub.subscribe().channels("chan-1").execute()
         self.onStart()
