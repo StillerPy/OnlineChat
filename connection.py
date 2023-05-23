@@ -33,8 +33,8 @@ class Connection:
     def __init__(self):
         self.userId = self.makeUserId()
         self.pubNub = self.makePubNub()
-        self.subscribeCallback = MySubscribeCallback(self.userId, self.onMessageFunc)
-        self.pubNub.add_listener(self.subscribeCallback)
+        subscribeCallback = MySubscribeCallback(self.userId, self.onMessageFunc)
+        self.pubNub.add_listener(subscribeCallback)
         self.pubNub.subscribe().channels("chan-1").execute()
         self.onStart()
 
@@ -65,12 +65,12 @@ class Connection:
         self.send(f'{self.userId} connected')
 
 
-
-
 if __name__ == '__main__':
     connection = Connection()
     while True:
         msg = input('Msg: ')
         if msg:
             connection.send(msg)
+    # test comment
+
 
