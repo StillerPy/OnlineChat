@@ -62,6 +62,7 @@ class Connection:
         self.pubNub.publish().channel("chan-1").message(msg).pn_async(self.my_publish_callback)
 
     def onStart(self):
+        #Функция излишняя, поскольку есть проверка на подключение
         self.send(f'{self.userId} connected')
 
 
